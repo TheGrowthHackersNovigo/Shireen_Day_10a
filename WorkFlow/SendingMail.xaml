@@ -5,7 +5,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>887,750</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1167,980</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SendingMail_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -116,7 +116,7 @@
       <AssemblyReference>System.Linq.Async</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SendingMail" sap:VirtualizedContainerService.HintSize="416,685" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Sending mail with the results obtained and exception screenshots to the mail id specified in the config&#xD;&#xA;" DisplayName="SendingMail : With results and exception screenshots" sap:VirtualizedContainerService.HintSize="416,915" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="Username" />
       <Variable x:TypeArguments="ss:SecureString" Name="Password" />
@@ -125,17 +125,19 @@
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[in_Config(&quot;Mail Credentials&quot;).ToString]" CacheStrategy="None" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="354,175" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[Password]" Username="[Username]" />
-    <uascw:CompressFiles CompressedResource="{x:Null}" Password="{x:Null}" ResourcesToArchive="{x:Null}" SecurePassword="{x:Null}" AllowDuplicateContentNames="False" CodePage="Default" CompressedFileInfo="[Screenshots]" CompressedFileName="Data\Compressed_screenshots" CompressionLevel="Normal" DisplayName="Compress/Zip Files" EncryptionAlgorithm="Classic" sap:VirtualizedContainerService.HintSize="354,247" sap2010:WorkflowViewState.IdRef="CompressFiles_1" OverrideExistingFile="True">
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[in_Config(&quot;Mail Credentials&quot;).ToString]" CacheStrategy="None" DisplayName="Get Credential : From assets" sap:VirtualizedContainerService.HintSize="354,175" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[Password]" Username="[Username]" />
+    <uascw:CompressFiles CompressedResource="{x:Null}" Password="{x:Null}" ResourcesToArchive="{x:Null}" SecurePassword="{x:Null}" AllowDuplicateContentNames="False" CodePage="Default" CompressedFileInfo="[Screenshots]" CompressedFileName="Data\Compressed_screenshots" CompressionLevel="Normal" DisplayName="Compress/Zip Files : Exception screenshots" EncryptionAlgorithm="Classic" sap:VirtualizedContainerService.HintSize="354,247" sap2010:WorkflowViewState.IdRef="CompressFiles_1" OverrideExistingFile="True">
       <uascw:CompressFiles.ContentToArchive>
         <scg:List x:TypeArguments="InArgument(x:String)" Capacity="1">
           <InArgument x:TypeArguments="x:String">C:\Users\Shireen.M\Documents\UiPath\Shireen_Day_10a\Exceptions_Screenshots</InArgument>
         </scg:List>
       </uascw:CompressFiles.ContentToArchive>
     </uascw:CompressFiles>
-    <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" Result="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" Body="Please find the attached files related to the NSE" DisplayName="Send SMTP Mail Message" Email="[Username]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="354,175" sap2010:WorkflowViewState.IdRef="SendMail_1" IgnoreCRL="False" IsBodyHtml="False" Port="587" SecureConnection="Auto" SecurePassword="[Password]" Server="smtp-mail.outlook.com" Subject="NSE files" To="[in_Config(&quot;To mail address&quot;).ToString]">
+    <ui:LogMessage DisplayName="Log Message : Compressing zip files completed" sap:VirtualizedContainerService.HintSize="354,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Compressing zip files completed&quot;]" />
+    <ui:SendMail Bcc="{x:Null}" ContinueOnError="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" Password="{x:Null}" ReplyTo="{x:Null}" Result="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" Body="Please find the attached files related to the NSE" Cc="[in_Config(&quot;CC mail address&quot;).ToString]" DisplayName="Send SMTP Mail Message : To the address specified" Email="[Username]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="354,175" sap2010:WorkflowViewState.IdRef="SendMail_1" IgnoreCRL="False" IsBodyHtml="False" Port="587" SecureConnection="Auto" SecurePassword="[Password]" Server="smtp-mail.outlook.com" Subject="NSE files" To="[in_Config(&quot;To mail address&quot;).ToString]">
       <ui:SendMail.Files>
         <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
           <InArgument x:TypeArguments="x:String">[Screenshots.ToString]</InArgument>

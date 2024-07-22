@@ -3,7 +3,7 @@
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_NseBrowser" Type="InArgument(ui:UiElement)" />
-    <x:Property Name="io_NseData" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="io_dt_NseData" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <this:RetrievingValuesFromWebsite.in_NseBrowser>
     <InArgument x:TypeArguments="ui:UiElement" />
@@ -11,7 +11,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1102,2105</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1102,2065</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>RetrievingValuesFromWebsite_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -54,6 +54,7 @@
       <x:String>UiPath.Platform.ObjectLibrary</x:String>
       <x:String>UiPath.Platform.SyncObjects</x:String>
       <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -115,9 +116,10 @@
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="RetrievingValuesFromWebsite" sap:VirtualizedContainerService.HintSize="1112,2040" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="RetrievingValuesFromWebsite" sap:VirtualizedContainerService.HintSize="1112,2000" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="WeeksHigh" />
       <Variable x:TypeArguments="x:String" Name="FaceValue" />
@@ -129,7 +131,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: undefined Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE Indi" sap:VirtualizedContainerService.HintSize="1050,1952" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="ed477a8c-4a3b-4eed-aa40-568fb71cfaf3" Version="V2" WindowResize="Maximize">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: undefined Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE Indi" sap:VirtualizedContainerService.HintSize="1050,1912" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="ed477a8c-4a3b-4eed-aa40-568fb71cfaf3" Version="V2" WindowResize="Maximize">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -157,7 +159,7 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NGetText DelayBefore="3" DisplayName="Get Text 'Company name'" sap:VirtualizedContainerService.HintSize="388,189" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="ed477a8c-4a3b-4eed-aa40-568fb71cfaf3" TextString="[CompanyName]" Version="V3">
+                  <uix:NGetText DelayBefore="[Double.Parse(in_Config(&quot;TimeOut&quot;).ToString())]" DisplayName="Get Text 'Company name'" sap:VirtualizedContainerService.HintSize="388,189" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="ed477a8c-4a3b-4eed-aa40-568fb71cfaf3" TextString="[CompanyName]" Version="V3">
                     <uix:NGetText.Target>
                       <uix:TargetAnchorable BrowserURL="https://www.nseindia.com/get-quotes/equity?symbol=INFY" CVScreenId="ff9e3c94-63a8-4f9e-b673-da55f4f155a5" CvTextArea="229, 290, 148, 15" CvType="AnyWordGroup" DesignTimeRectangle="231, 289, 150, 19" DesignTimeScaleFactor="1" ElementType="Text" FullSelectorArgument="&lt;webctrl parentid='quoteName' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl parentid='quoteName' tag='SPAN' type='' class='' /&gt;" Guid="7295a0ef-612b-426e-bc4e-e5252a347599" ImageBase64="" InformativeScreenshot="7dc1dcf575598344b6f63df63e5a0e9c.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Infosys Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India' /&gt;" SearchSteps="Selector" Version="V4" Visibility="Interactive">
                         <uix:TargetAnchorable.Anchors>
@@ -234,10 +236,10 @@
                   </ui:LogMessage>
                   <uix:NGetText DisplayName="Get Text '52 Week High'" sap:VirtualizedContainerService.HintSize="388,189" sap2010:WorkflowViewState.IdRef="NGetText_4" ScopeIdentifier="ed477a8c-4a3b-4eed-aa40-568fb71cfaf3" TextString="[WeeksHigh]" Version="V3">
                     <uix:NGetText.Target>
-                      <uix:TargetAnchorable BrowserURL="https://www.nseindia.com/get-quotes/equity?symbol=INFY" CVScreenId="4cf3d9db-077c-4ce2-929c-b48c93759277" CvTextArea="1029, 548, 49, 13" CvType="AnyWordGroup" DesignTimeRectangle="1030, 548, 48, 14" DesignTimeScaleFactor="1" ElementType="Text" FullSelectorArgument="&lt;webctrl aria-role='presentation' idx='2' parentid='info-tradeinfo' tag='TABLE' /&gt;&lt;webctrl class='bold' tableRow='2' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl aria-role='presentation' parentid='info-tradeinfo' tag='TABLE' /&gt;&lt;webctrl class='bold' type='' tag='SPAN' /&gt;" Guid="d22931ed-0d20-490f-92c1-dfc25f68ca34" ImageBase64="" InformativeScreenshot="68114ff63ab8df5868312f43a4c30304.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Infosys Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India' /&gt;" SearchSteps="Selector" Version="V4" Visibility="Interactive">
+                      <uix:TargetAnchorable BrowserURL="https://www.nseindia.com/get-quotes/equity?symbol=INFY" CVScreenId="4cf3d9db-077c-4ce2-929c-b48c93759277" CvTextArea="1029, 548, 49, 13" CvType="AnyWordGroup" DesignTimeRectangle="1030, 548, 48, 14" DesignTimeScaleFactor="1" ElementType="Text" FullSelectorArgument="&lt;webctrl aria-role='presentation' parentid='info-tradeinfo' tag='TABLE' /&gt;&lt;webctrl class='bold' tableRow='2' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl aria-role='presentation' parentid='info-tradeinfo' tag='TABLE' /&gt;&lt;webctrl class='bold' type='' tag='SPAN' /&gt;" Guid="d22931ed-0d20-490f-92c1-dfc25f68ca34" ImageBase64="" InformativeScreenshot="68114ff63ab8df5868312f43a4c30304.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Infosys Limited Share Price Today, Stock Price, Live NSE News, Quotes, Tips – NSE India' /&gt;" SearchSteps="Selector" Version="V4" Visibility="Interactive">
                         <uix:TargetAnchorable.Anchors>
                           <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target CVScreenId="4cf3d9db-077c-4ce2-929c-b48c93759277" CvTextArea="821, 548, 74, 14" CvTextArgument="52 Week High" CvType="Text" DesignTimeRectangle="822, 548, 76, 14" ElementType="Text" FullSelectorArgument="&lt;webctrl aria-role='presentation' idx='2' parentid='info-tradeinfo' tag='TABLE' /&gt;&lt;webctrl id='wkhi' tableRow='2' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl aria-role='presentation' parentid='info-tradeinfo' tag='TABLE' /&gt;&lt;webctrl id='wkhi' type='' tag='SPAN' class='' aaname='52 Week High ' check:innerText='52 Week High' /&gt;" Guid="f82f4c14-bcd7-48ff-aa73-3f1c51694aad" SearchSteps="Selector" />
+                            <uix:Target CVScreenId="4cf3d9db-077c-4ce2-929c-b48c93759277" CvTextArea="821, 548, 74, 14" CvTextArgument="52 Week High" CvType="Text" DesignTimeRectangle="822, 548, 76, 14" ElementType="Text" FullSelectorArgument="&lt;webctrl aria-role='presentation' parentid='info-tradeinfo' tag='TABLE' /&gt;&lt;webctrl id='wkhi' tableRow='2' tag='SPAN' /&gt;" FuzzySelectorArgument="&lt;webctrl aria-role='presentation' parentid='info-tradeinfo' tag='TABLE' /&gt;&lt;webctrl id='wkhi' type='' tag='SPAN' class='' aaname='52 Week High ' check:innerText='52 Week High' /&gt;" Guid="f82f4c14-bcd7-48ff-aa73-3f1c51694aad" SearchSteps="Selector" />
                           </scg:List>
                         </uix:TargetAnchorable.Anchors>
                       </uix:TargetAnchorable>
@@ -257,7 +259,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:LogMessage>
-                  <ui:AddDataRow DataRow="{x:Null}" sap2010:Annotation.AnnotationText="Add all the obtained values like company id,company name, prev close, face value and 52 weeks high to the data table&#xD;&#xA;" ArrayRow="[{in_TransactionItem.SpecificContent(&quot;CompanyCode&quot;),CompanyName,PrevClose,FaceValue,WeeksHigh}]" DataTable="[io_NseData]" DisplayName="Add Data Row : Values obtained" sap:VirtualizedContainerService.HintSize="388,152" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+                  <ui:AddDataRow DataRow="{x:Null}" sap2010:Annotation.AnnotationText="Add all the obtained values like company id,company name, prev close, face value and 52 weeks high to the data table&#xA;" ArrayRow="[{in_TransactionItem.SpecificContent(&quot;CompanyCode&quot;),CompanyName,PrevClose,FaceValue,WeeksHigh}]" DataTable="[io_dt_NseData]" DisplayName="Add Data Row : Values obtained" sap:VirtualizedContainerService.HintSize="388,152" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>

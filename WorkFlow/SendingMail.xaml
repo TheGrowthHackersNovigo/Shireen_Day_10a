@@ -5,7 +5,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1167,980</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>861,980</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SendingMail_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -116,7 +116,7 @@
       <AssemblyReference>System.Linq.Async</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Sending mail with the results obtained and exception screenshots to the mail id specified in the config&#xD;&#xA;" DisplayName="SendingMail : With results and exception screenshots" sap:VirtualizedContainerService.HintSize="416,915" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Sending mail with the results obtained and exception screenshots to the mail id specified in the config&#xA;" DisplayName="SendingMail : With results and exception screenshots" sap:VirtualizedContainerService.HintSize="416,915" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="Username" />
       <Variable x:TypeArguments="ss:SecureString" Name="Password" />
@@ -129,10 +129,10 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[in_Config(&quot;Mail Credentials&quot;).ToString]" CacheStrategy="None" DisplayName="Get Credential : From assets" sap:VirtualizedContainerService.HintSize="354,175" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[Password]" Username="[Username]" />
-    <uascw:CompressFiles CompressedResource="{x:Null}" Password="{x:Null}" ResourcesToArchive="{x:Null}" SecurePassword="{x:Null}" AllowDuplicateContentNames="False" CodePage="Default" CompressedFileInfo="[Screenshots]" CompressedFileName="Data\Compressed_screenshots" CompressionLevel="Normal" DisplayName="Compress/Zip Files : Exception screenshots" EncryptionAlgorithm="Classic" sap:VirtualizedContainerService.HintSize="354,247" sap2010:WorkflowViewState.IdRef="CompressFiles_1" OverrideExistingFile="True">
+    <uascw:CompressFiles CompressedResource="{x:Null}" Password="{x:Null}" ResourcesToArchive="{x:Null}" SecurePassword="{x:Null}" AllowDuplicateContentNames="False" CodePage="Default" CompressedFileInfo="[Screenshots]" CompressedFileName="[in_Config(&quot;CompressedFilePath&quot;).ToString]" CompressionLevel="Normal" DisplayName="Compress/Zip Files : Exception screenshots" EncryptionAlgorithm="Classic" sap:VirtualizedContainerService.HintSize="354,247" sap2010:WorkflowViewState.IdRef="CompressFiles_1" OverrideExistingFile="True">
       <uascw:CompressFiles.ContentToArchive>
         <scg:List x:TypeArguments="InArgument(x:String)" Capacity="1">
-          <InArgument x:TypeArguments="x:String">C:\Users\Shireen.M\Documents\UiPath\Shireen_Day_10a\Exceptions_Screenshots</InArgument>
+          <InArgument x:TypeArguments="x:String">[in_Config("ExceptionScreenshots").ToString]</InArgument>
         </scg:List>
       </uascw:CompressFiles.ContentToArchive>
     </uascw:CompressFiles>

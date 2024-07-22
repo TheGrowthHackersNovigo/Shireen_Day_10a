@@ -3,7 +3,7 @@
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_NseBrowser" Type="InArgument(ui:UiElement)" />
-    <x:Property Name="io_NseData" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="io_dt_NseData" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <this:Process.in_NseBrowser>
     <InArgument x:TypeArguments="ui:UiElement" />
@@ -140,7 +140,7 @@
         <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
         <InArgument x:TypeArguments="ui:UiElement" x:Key="in_NseBrowser">[in_NseBrowser]</InArgument>
-        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_NseData">[io_NseData]</InOutArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_NseData">[io_dt_NseData]</InOutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
